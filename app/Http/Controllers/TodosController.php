@@ -13,4 +13,14 @@ class TodosController extends Controller
     	$todos = Todo::all();
     	return view('todos')->with('todos', $todos);
     }
+
+    // Data from form, new todo - post request
+    public function store(Request $request){
+    	//Ubacujem u bazu novi Todo
+    	$todo = new Todo;
+    	$todo->todo = $request->todo;
+    	$todo->save();
+    	// Redirekcija
+    	return redirect()->back();
+    }
 }
