@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Todo;
+use Session;
 
 use Illuminate\Http\Request;
 
@@ -20,6 +21,8 @@ class TodosController extends Controller
     	$todo = new Todo;
     	$todo->todo = $request->todo;
     	$todo->save();
+        // Flash message
+        Session::flash('success', 'Your todo was creted successfully!');
     	// Redirekcija
     	return redirect()->back();
     }
@@ -31,6 +34,8 @@ class TodosController extends Controller
     	$todo = Todo::find($id);
     	// Brisem ga
     	$todo->delete();
+        // Flash message
+        Session::flash('success', 'Your todo was deleted successfully!');
     	// Redirekcija
     	return redirect()->back();
     }
@@ -53,6 +58,8 @@ class TodosController extends Controller
     	$todo->todo = $request->todo;
     	// Sacuvavam u bazi
     	$todo->save();
+        // Flash message
+        Session::flash('success', 'Your todo was updated successfully!');
     	// Redireckija
     	return redirect(route('todos'));
     }
@@ -65,6 +72,8 @@ class TodosController extends Controller
         // Complleted je ako je 1, menjam sa 0 na 1
         $todo->completed = 1;
         $todo->save();
+        // Flash message
+        Session::flash('success', 'Your todo was completed successfully');
         // Redirekcija
         return redirect()->back();
     }
