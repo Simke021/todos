@@ -56,4 +56,16 @@ class TodosController extends Controller
     	// Redireckija
     	return redirect(route('todos'));
     }
+
+    // Completed
+    public function completed($id)
+    {
+        // Utimam todo iz baze po id-u
+        $todo = Todo::find($id);
+        // Complleted je ako je 1, menjam sa 0 na 1
+        $todo->completed = 1;
+        $todo->save();
+        // Redirekcija
+        return redirect()->back();
+    }
 }
