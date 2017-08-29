@@ -23,6 +23,7 @@ class TodosController extends Controller
     	// Redirekcija
     	return redirect()->back();
     }
+
     // Brisadnje todo-a po id-u
     public function delete($id)
     {
@@ -32,5 +33,27 @@ class TodosController extends Controller
     	$todo->delete();
     	// Redirekcija
     	return redirect()->back();
+    }
+
+    // Update todo-a
+    public function update($id)
+    {
+    	// Treazim todo po id-u
+    	$todo = Todo::find($id);
+    	// Prikazujem ga na strani za update
+    	return view('update')->with('todo', $todo);
+    }
+
+    // Post metod forme za update todo-a
+    public function save(Request $request, $id)
+    {
+    	// Treazim todo po id-u
+    	$todo = Todo::find($id);
+    	// Uzimam vrednost iz forme
+    	$todo->todo = $request->todo;
+    	// Sacuvavam u bazi
+    	$todo->save();
+    	// Redireckija
+    	return redirect(route('todos'));
     }
 }
