@@ -23,4 +23,14 @@ class TodosController extends Controller
     	// Redirekcija
     	return redirect()->back();
     }
+    // Brisadnje todo-a po id-u
+    public function delete($id)
+    {
+    	// Trazim iz baze todo po id-u
+    	$todo = Todo::find($id);
+    	// Brisem ga
+    	$todo->delete();
+    	// Redirekcija
+    	return redirect()->back();
+    }
 }
